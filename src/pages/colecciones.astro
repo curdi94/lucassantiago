@@ -2,19 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import { Image } from 'astro:assets';
-
-// Orden de las colecciones (la primera es la más reciente/destacada)
-const collectionOrder = [
-    { folder: 'vacuo', name: 'Vacuo' },
-    { folder: 'vacas_2_3', name: 'Vacas 2.3' },
-    { folder: 'vacas_2_2', name: 'Vacas 2.2' },
-    { folder: 'vacas_2_0', name: 'Vacas' },
-    { folder: 'recolectores', name: 'Recolectores' },
-    { folder: 'ciudades_intermitentes', name: 'Ciudades Intermitentes' },
-    { folder: '28', name: '28' },
-    { folder: 'chosco', name: 'Chosco' },
-    { folder: 'varias', name: 'Varias' },
-];
+import { collections } from '../config/collections.js';
 
 // Importar todas las imágenes de assets
 const allImages = import.meta.glob('/src/assets/**/*.{jpg,jpeg,png,webp,PNG,JPG,JPEG}', { eager: true });
@@ -42,7 +30,7 @@ const PREVIEW_LIMIT = 3;
     <main class="pt-24 px-4 sm:px-8 max-w-7xl mx-auto pb-16">
         <h1 class="text-4xl font-sans font-light text-stone-800 mb-12 uppercase tracking-widest">Colecciones</h1>
         
-        {collectionOrder.map(({ folder, name }) => {
+        {collections.map(({ folder, name }) => {
             const images = imagesByFolder[folder] || [];
             const previewImages = images.slice(0, PREVIEW_LIMIT);
             const hasMore = images.length > PREVIEW_LIMIT;

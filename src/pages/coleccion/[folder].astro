@@ -2,40 +2,18 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import { Image } from 'astro:assets';
-
-// Definir las colecciones disponibles
-const collectionInfo: Record<string, string> = {
-    'vacuo': 'Vacuo',
-    'vacas_2_3': 'Vacas 2.3',
-    'vacas_2_2': 'Vacas 2.2',
-    'vacas_2_0': 'Vacas',
-    'recolectores': 'Recolectores',
-    'ciudades_intermitentes': 'Ciudades Intermitentes',
-    '28': '28',
-    'chosco': 'Chosco',
-    'varias': 'Varias',
-};
+import { collectionNames, collectionPaths } from '../../config/collections.js';
 
 // Importar todas las imágenes
 const allImages = import.meta.glob('/src/assets/**/*.{jpg,jpeg,png,webp,PNG,JPG,JPEG}', { eager: true });
 
 // Generar rutas estáticas para cada colección
 export function getStaticPaths() {
-    return [
-        { params: { folder: 'vacuo' } },
-        { params: { folder: 'vacas_2_3' } },
-        { params: { folder: 'vacas_2_2' } },
-        { params: { folder: 'vacas_2_0' } },
-        { params: { folder: 'recolectores' } },
-        { params: { folder: 'ciudades_intermitentes' } },
-        { params: { folder: '28' } },
-        { params: { folder: 'chosco' } },
-        { params: { folder: 'varias' } },
-    ];
+    return collectionPaths;
 }
 
 const { folder } = Astro.params;
-const collectionName = collectionInfo[folder] || folder;
+const collectionName = collectionNames[folder] || folder;
 
 // Filtrar imágenes de esta colección
 const images = Object.entries(allImages)
