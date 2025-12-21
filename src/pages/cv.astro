@@ -1,0 +1,134 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+
+const biografia = {
+    lugar: "Tineo",
+    año: 1967,
+    intro: "Estudia Joyería y Diseño en la Escola Massana de Barcelona (1985-1991) bajo la docencia de profesores como Ramón Puig Cuyás o Hans Leicht. Desde 1993 trabaja en Tineo, y desde 2008 en su nuevo Workshow donde crea y expone, un espacio interactivo entre la obra y el espectador."
+};
+
+const secciones = [
+    {
+        titulo: "Exposiciones Individuales",
+        items: [
+            { nombre: "Vacuo", lugar: "Fundación Museo Evaristo Valle, Gijón", año: 2022 },
+            { nombre: "Vacas 2.3", lugar: "Tineo", año: 2019 },
+            { nombre: "Vacas 2.2", lugar: "Centro Leonés de Arte, Instituto Leonés de Cultura", año: 2019 },
+            { nombre: "Vacas 2.1", lugar: "Casa de Cultura de Vegadeo", año: 2018 },
+            { nombre: "Vacas 2.0", lugar: "Tineo", año: 2016 },
+            { nombre: "Recolectores", lugar: "Tineo", año: 2015 },
+            { nombre: "Ciudades Intermitentes", lugar: "Tineo", año: 2012 },
+            { nombre: "Por qué lloran las mujeres...?", lugar: "Tineo", año: 2010 },
+            { nombre: "28", lugar: "Tineo", año: 2009 },
+            { nombre: "Festival de la Lana", lugar: "Tuña, Tineo", año: 2006 },
+            { nombre: "Vacas en el Rio", lugar: "Casa de Cultura de Tineo", año: 2005 },
+            { nombre: "Bateas II", lugar: "Centro Cultural 'Gabriel Celaya', San Fernando de Henares, Madrid", año: 2005 },
+            { nombre: "Pro-Art", lugar: "Iasy, Rumania", año: 2005 },
+            { nombre: "Bateas", lugar: "Trabe Aula Abierta, Oviedo | Casa de Cultura de Navelgas, Tineo", año: 2004 },
+        ]
+    },
+    {
+        titulo: "Exposiciones Colectivas",
+        items: [
+            { nombre: "ArtexAgua", lugar: "Auditorio de Oviedo", año: 2015 },
+            { nombre: "ArtexAgua", lugar: "Centro Cultural Niemeyer, Avilés", año: 2013 },
+            { nombre: "Holownia", lugar: "Legnica, Polonia", año: 2009 },
+            { nombre: "Entornos Liquidos, más allá de lo evidente", lugar: "Casa de Cultura de Vegadeo", año: 2008 },
+            { nombre: "Asturias-Barcelona, un viaje a la joyería Contemporánea", lugar: "Museo del Oro de Asturias, Navelgas, Tineo", año: 2008 },
+            { nombre: "Breakfast in Sitges", lugar: "Sitges, Barcelona", año: 2007 },
+            { nombre: "Holownia", lugar: "Legnica, Polonia", año: 2007 },
+            { nombre: "Auri-Consensus", lugar: "Museo del Oro de Asturias, Navelgas, Tineo", año: 2007 },
+            { nombre: "Museo del traje", lugar: "Madrid", año: 2006 },
+            { nombre: "Ciment Francoise", lugar: "Sur de Francia", año: 1991 },
+            { nombre: "Junged Gestalted", lugar: "Munich", año: 1990 },
+        ]
+    },
+    {
+        titulo: "Ferias Internacionales",
+        items: [
+            { nombre: "Sieraad", lugar: "Amsterdam", año: 2008 },
+            { nombre: "Inhorgenta", lugar: "Munich", año: 2007 },
+            { nombre: "Kara", lugar: "Paris", año: 2007 },
+            { nombre: "Kara", lugar: "Paris", año: 2006 },
+        ]
+    },
+    {
+        titulo: "Performances",
+        items: [
+            { nombre: "Meninas", lugar: "Oviedo", año: 2006 },
+            { nombre: "Cow Parade", lugar: "Paris", año: 2005 },
+        ]
+    },
+    {
+        titulo: "Exposiciones con Jurado",
+        items: [
+            { nombre: "Porno", lugar: "Gallería Johan's, Helsinki", año: 2009 },
+        ]
+    },
+    {
+        titulo: "Workshops",
+        items: [
+            { nombre: "Mari Ishikawa", lugar: "Orfebres FAD, Barcelona", año: 2008 },
+            { nombre: "Doris Maninger", lugar: "Orfebres FAD, Barcelona", año: 2008 },
+        ]
+    },
+    {
+        titulo: "Publicaciones",
+        items: [
+            { nombre: "Campo los Patos", lugar: "Revista Cultural", año: 2016 },
+            { nombre: "SIETE, maestros de la pastelería moderna", lugar: "", año: 2010 },
+        ]
+    },
+];
+---
+
+<Layout title="CV">
+    <Navbar />
+
+    <main class="pt-24 px-4 sm:px-8 max-w-4xl mx-auto pb-16">
+        {/* Cabecera */}
+        <header class="mb-16 text-center py-8">
+            <h1 class="text-5xl md:text-6xl font-light uppercase tracking-widest mb-4" style="font-family: 'Oswald', sans-serif; color: #FF5722;">
+                Lucas Santiago
+            </h1>
+            <p class="text-xl text-stone-500 font-light tracking-wide">
+                {biografia.lugar} · {biografia.año}
+            </p>
+        </header>
+
+        {/* Biografía */}
+        <section class="mb-16">
+            <p class="text-lg text-stone-700 font-light leading-relaxed max-w-3xl mx-auto text-center">
+                {biografia.intro}
+            </p>
+        </section>
+
+        {/* Secciones del CV */}
+        <div class="space-y-16">
+            {secciones.map((seccion) => (
+                <section class="mt-12 border-t border-stone-300 pt-10 first:mt-0">
+                    <h2 class="text-xl uppercase tracking-widest mb-8 font-medium text-stone-700" style="font-family: 'Oswald', sans-serif;">
+                        {seccion.titulo}
+                    </h2>
+                    
+                    <ul class="space-y-3">
+                        {seccion.items.map((item) => (
+                            <li class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 py-2 border-b border-stone-100 last:border-0">
+                                <span class="text-stone-400 text-sm font-medium tabular-nums w-12 shrink-0">
+                                    {item.año}
+                                </span>
+                                <span class="text-stone-800 font-light">
+                                    <em>"{item.nombre}"</em>
+                                    {item.lugar && (
+                                        <span class="text-stone-500">, {item.lugar}</span>
+                                    )}
+                                </span>
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+            ))}
+        </div>
+    </main>
+</Layout>

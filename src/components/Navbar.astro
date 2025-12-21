@@ -1,0 +1,90 @@
+---
+const links = [
+    { name: "Inicio", href: "/" },
+    { name: "Colecciones", href: "/colecciones" },
+    { name: "CV", href: "/cv" },
+    { name: "Contacto", href: "/contacto" },
+];
+---
+<nav class="fixed top-0 w-full z-50 bg-stone-50/90 backdrop-blur-sm border-b border-stone-200">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="flex justify-between items-center h-20">
+            <div class="flex-shrink-0 flex items-center">
+                <a href="/" class="text-2xl tracking-widest uppercase nav-logo text-stone-800" style="font-family: 'Oswald', sans-serif;">
+                    Lucas Santiago
+                </a>
+            </div>
+            
+            <div class="hidden md:flex space-x-2">
+                {links.map((link) => (
+                    <a href={link.href} class="nav-link px-4 py-2 text-sm font-light tracking-wide uppercase">
+                        {link.name}
+                    </a>
+                ))}
+            </div>
+
+            <!-- Mobile menu button -->
+            <button class="md:hidden p-2" id="mobile-menu-btn">
+                <svg class="w-6 h-6 text-stone-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+        </div>
+    </div>
+
+    <!-- Mobile menu -->
+    <div class="hidden md:hidden" id="mobile-menu">
+        <div class="px-4 py-4 space-y-2 bg-stone-50 border-t border-stone-200">
+            {links.map((link) => (
+                <a href={link.href} class="block px-4 py-3 text-sm font-light tracking-wide uppercase text-stone-600 hover:text-stone-900 hover:bg-stone-100 transition-colors">
+                    {link.name}
+                </a>
+            ))}
+        </div>
+    </div>
+</nav>
+
+<style>
+    .nav-link {
+        position: relative;
+        color: #57534e;
+        transition: color 0.3s ease;
+    }
+    
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 0;
+        height: 2px;
+        background-color: #FF5722;
+        transition: all 0.3s ease;
+        transform: translateX(-50%);
+    }
+    
+    .nav-link:hover {
+        color: #FF5722;
+    }
+    
+    .nav-link:hover::after {
+        width: 80%;
+    }
+
+    .nav-logo {
+        transition: opacity 0.3s ease;
+    }
+
+    .nav-logo:hover {
+        opacity: 0.8;
+    }
+</style>
+
+<script>
+    const btn = document.getElementById('mobile-menu-btn');
+    const menu = document.getElementById('mobile-menu');
+    
+    btn?.addEventListener('click', () => {
+        menu?.classList.toggle('hidden');
+    });
+</script>

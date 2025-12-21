@@ -1,0 +1,116 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+
+// Importar imágenes para fondo aleatorio
+const allImages = import.meta.glob('/src/assets/**/*.{jpg,jpeg,png,webp}', { eager: true });
+const imageUrls = Object.values(allImages).map((img: any) => img.default.src);
+const randomBg = imageUrls[Math.floor(Math.random() * imageUrls.length)];
+
+// Exposiciones actuales (dos muestras simultáneas)
+const exposiciones = {
+    lugar: "Hotel Palacio de Merás",
+    ubicacion: "Tineo, Asturias",
+    fecha: "Hasta final del año 2025",
+    videoId: "-RwfYSBFenc",
+};
+
+const vacuo = {
+    titulo: "Vacuo",
+    artista: "Lucas Santiago",
+    descripcion: `Una exposición donde Lucas Santiago rescata objetos olvidados de pueblos abandonados para transformarlos en piezas de joyería contemporánea. Esta muestra invita a reflexionar sobre el vacío que dejan los lugares que un día fueron hogar.
+
+A través de materiales como maderas, huesos, piedras y cuernos —todos ellos marcados por el paso del tiempo—, Santiago devuelve la vida a estos objetos, convirtiéndolos en joyas que guardan la memoria de quienes los usaron. El título "Vacuo" hace referencia a ese silencio de las aldeas abandonadas, espacios que aún conservan secretos y vivencias de sus antiguos habitantes.
+
+"La reserva espiritual de nuestra sociedad está en los pueblos", reflexiona el artista. Esta exposición es un ejercicio de memoria colectiva, una forma de evitar que el folclore y la cultura rural caigan en el olvido.`
+};
+---
+
+<Layout title="Lucas Santiago - Joyería Rural Contemporánea">
+    <Navbar />
+
+    {/* Fondo decorativo */}
+    <div class="fixed inset-0 z-0 pointer-events-none">
+        <div
+            class="absolute inset-0 bg-cover bg-center opacity-5"
+            style={`background-image: url('${randomBg}');`}
+        ></div>
+    </div>
+
+    <main class="relative z-10 pt-24 px-4 sm:px-8 max-w-6xl mx-auto pb-16">
+        {/* Hero compacto */}
+        <section class="mb-10 text-center py-6">
+            <h1 class="text-lg md:text-xl uppercase tracking-widest text-stone-700 mb-8" style="font-family: 'Oswald', sans-serif;">
+                Exposición actual
+            </h1>
+
+            {/* Dos exposiciones en grid simétrico */}
+            <div class="grid md:grid-cols-2 gap-6 max-w-3xl mx-auto mb-6">
+                <div class="text-center md:text-right p-4">
+                    <h2 class="text-3xl md:text-4xl font-light uppercase tracking-widest mb-2" style="font-family: 'Oswald', sans-serif; color: #FF5722;">
+                        {vacuo.titulo}
+                    </h2>
+                    <p class="text-sm text-stone-500 font-light">{vacuo.artista}</p>
+                </div>
+
+                <div class="text-center md:text-left p-4 md:border-l border-stone-200">
+                    <h2 class="text-3xl md:text-4xl font-light uppercase tracking-widest text-stone-700 mb-2" style="font-family: 'Oswald', sans-serif;">
+                        A fuego y martillo
+                    </h2>
+                    <p class="text-sm text-stone-500 font-light">César Castaño</p>
+                </div>
+            </div>
+
+            <p class="text-stone-500 font-light text-sm">
+                {exposiciones.lugar} · {exposiciones.ubicacion} · {exposiciones.fecha}
+            </p>
+        </section>
+
+        {/* Grid: Vídeo + Descripción */}
+        <section class="mb-10">
+            <div class="grid lg:grid-cols-2 gap-8 items-start">
+                {/* Vídeo */}
+                <div class="aspect-video w-full">
+                    <iframe
+                        class="w-full h-full"
+                        src={`https://www.youtube.com/embed/${exposiciones.videoId}`}
+                        title="Vídeo de la exposición Vacuo"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+
+                {/* Descripción */}
+                <div class="text-stone-700 font-light leading-relaxed text-sm md:text-base">
+                    {vacuo.descripcion.split('\n\n').map((parrafo) => (
+                        <p class="mb-4 last:mb-0">{parrafo}</p>
+                    ))}
+                </div>
+            </div>
+        </section>
+
+        {/* CTA */}
+        <section class="text-center py-6 border-t border-stone-200">
+            <a
+                href="/contacto"
+                class="cta-btn inline-block px-6 py-2 text-sm uppercase tracking-widest font-light transition-all duration-300"
+            >
+                Contactar
+            </a>
+        </section>
+    </main>
+</Layout>
+
+<style>
+    .cta-btn {
+        border: 2px solid #FF5722;
+        color: #FF5722;
+    }
+
+    .cta-btn:hover {
+        background-color: #FF5722;
+        color: white;
+        border-color: #FF5722;
+    }
+</style>

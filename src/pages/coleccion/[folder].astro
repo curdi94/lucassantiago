@@ -1,0 +1,160 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import { Image } from 'astro:assets';
+
+// Definir las colecciones disponibles
+const collectionInfo: Record<string, string> = {
+    'vacuo': 'Vacuo',
+    'vacas_2_3': 'Vacas 2.3',
+    'vacas_2_2': 'Vacas 2.2',
+    'vacas_2_0': 'Vacas',
+    'recolectores': 'Recolectores',
+    'ciudades_intermitentes': 'Ciudades Intermitentes',
+    '28': '28',
+    'chosco': 'Chosco',
+    'varias': 'Varias',
+};
+
+// Importar todas las imágenes
+const allImages = import.meta.glob('/src/assets/**/*.{jpg,jpeg,png,webp,PNG,JPG,JPEG}', { eager: true });
+
+// Generar rutas estáticas para cada colección
+export function getStaticPaths() {
+    return [
+        { params: { folder: 'vacuo' } },
+        { params: { folder: 'vacas_2_3' } },
+        { params: { folder: 'vacas_2_2' } },
+        { params: { folder: 'vacas_2_0' } },
+        { params: { folder: 'recolectores' } },
+        { params: { folder: 'ciudades_intermitentes' } },
+        { params: { folder: '28' } },
+        { params: { folder: 'chosco' } },
+        { params: { folder: 'varias' } },
+    ];
+}
+
+const { folder } = Astro.params;
+const collectionName = collectionInfo[folder] || folder;
+
+// Filtrar imágenes de esta colección
+const images = Object.entries(allImages)
+    .filter(([path]) => {
+        const parts = path.split('/');
+        return parts[3] === folder;
+    })
+    .map(([, img]) => (img as any).default);
+---
+
+<Layout title={`${collectionName} - Colección`}>
+    <Navbar />
+
+    <main class="pt-24 px-4 sm:px-8 max-w-7xl mx-auto pb-16">
+        <!-- Navegación -->
+        <a href="/colecciones" class="back-link">
+            <svg class="back-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
+            </svg>
+            Volver a colecciones
+        </a>
+
+        <h1 class="text-4xl font-sans font-medium mb-4 tracking-widest uppercase" style="color: #FF5722; font-family: 'Oswald', sans-serif;">
+            {collectionName}
+        </h1>
+
+        <p class="text-stone-600 mb-12">{images.length} imágenes</p>
+
+        <!-- Grid de imágenes -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {images.map((img, index) => (
+                <article class="bg-white group overflow-hidden border border-stone-200 hover:border-stone-400 transition-all duration-300 hover:shadow-lg">
+                    <div class="aspect-square relative overflow-hidden cursor-pointer" data-lightbox data-src={img.src}>
+                        <Image
+                            src={img}
+                            alt={`${collectionName} - Pieza ${index + 1}`}
+                            widths={[300, 600]}
+                            sizes="(max-width: 600px) 300px, 600px"
+                            loading="lazy"
+                            class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                        />
+                        {/* Overlay con lupa */}
+                        <div class="absolute inset-0 bg-black/0 group-hover:bg-black/30 transition-all duration-300 flex items-center justify-center">
+                            <svg class="w-12 h-12 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0zM10 7v3m0 0v3m0-3h3m-3 0H7" />
+                            </svg>
+                        </div>
+                    </div>
+                </article>
+            ))}
+        </div>
+    </main>
+</Layout>
+
+<!-- Lightbox Modal -->
+<div id="lightbox" class="fixed inset-0 z-50 hidden bg-black/90 flex items-center justify-center p-4">
+    <button id="lightbox-close" class="absolute top-4 right-4 text-white hover:text-stone-300 transition-colors z-10">
+        <svg class="w-10 h-10" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+    </button>
+    <img id="lightbox-img" src="" alt="Imagen ampliada" class="max-w-full max-h-full object-contain" />
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.getElementById('lightbox-close');
+
+        // Abrir lightbox al hacer clic en imagen
+        document.querySelectorAll('[data-lightbox]').forEach(el => {
+            el.addEventListener('click', () => {
+                const src = el.getAttribute('data-src');
+                if (src && lightboxImg && lightbox) {
+                    lightboxImg.src = src;
+                    lightbox.classList.remove('hidden');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        // Cerrar lightbox
+        const closeLightbox = () => {
+            if (lightbox) {
+                lightbox.classList.add('hidden');
+                document.body.style.overflow = '';
+            }
+        };
+
+        closeBtn?.addEventListener('click', closeLightbox);
+        lightbox?.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        // Cerrar con tecla Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') closeLightbox();
+        });
+    });
+</script>
+
+<style>
+    .back-link {
+        display: inline-flex;
+        align-items: center;
+        color: #57534e;
+        margin-bottom: 2rem;
+        transition: color 0.2s;
+        text-decoration: none;
+    }
+
+    .back-link:hover {
+        color: #292524;
+    }
+
+    .back-icon {
+        width: 1.25rem;
+        height: 1.25rem;
+        margin-right: 0.5rem;
+    }
+</style>
