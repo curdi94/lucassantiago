@@ -10,7 +10,8 @@ const links = [
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex justify-between items-center h-20">
             <div class="flex-shrink-0 flex items-center">
-                <a href="/" class="text-2xl tracking-widest uppercase nav-logo text-stone-800" style="font-family: 'Oswald', sans-serif;">
+                <a href="/" class="text-2xl tracking-widest uppercase nav-logo text-stone-800 flex items-center gap-2" style="font-family: 'Oswald', sans-serif;">
+                    <img src="/favicon-32x32.png" alt="" class="w-8 h-8" />
                     Lucas Santiago
                 </a>
             </div>
@@ -58,13 +59,13 @@ const links = [
         left: 50%;
         width: 0;
         height: 2px;
-        background-color: #FF5722;
+        background-color: #9D7748;
         transition: all 0.3s ease;
         transform: translateX(-50%);
     }
     
     .nav-link:hover {
-        color: #FF5722;
+        color: #9D7748;
     }
     
     .nav-link:hover::after {
