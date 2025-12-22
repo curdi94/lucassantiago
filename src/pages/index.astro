@@ -70,15 +70,19 @@ A través de materiales como maderas, huesos, piedras y cuernos —todos ellos m
         <section class="mb-10">
             <div class="grid lg:grid-cols-2 gap-8 items-start">
                 {/* Vídeo */}
-                <div class="aspect-video w-full">
-                    <iframe
-                        class="w-full h-full"
-                        src={`https://www.youtube.com/embed/${exposiciones.videoId}`}
-                        title="Vídeo de la exposición Vacuo"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen
-                    ></iframe>
+                <div class="video-container aspect-video w-full" data-video-id={exposiciones.videoId}>
+                    <img
+                        src={`https://img.youtube.com/vi/${exposiciones.videoId}/maxresdefault.jpg`}
+                        alt="Vídeo de la exposición Vacuo"
+                        class="video-thumbnail"
+                        loading="lazy"
+                    />
+                    <button class="play-button" aria-label="Reproducir vídeo">
+                        <svg viewBox="0 0 68 48" width="68" height="48">
+                            <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24S67.94,13.05,66.52,7.74z" fill="#212121" fill-opacity="0.8"></path>
+                            <path d="M 45,24 27,14 27,34" fill="#fff"></path>
+                        </svg>
+                    </button>
                 </div>
 
                 {/* Descripción */}
@@ -113,4 +117,101 @@ A través de materiales como maderas, huesos, piedras y cuernos —todos ellos m
         color: white;
         border-color: #9D7748;
     }
+
+    .video-container {
+        position: relative;
+        cursor: pointer;
+        overflow: hidden;
+        background-color: #000;
+    }
+
+    .video-thumbnail {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: opacity 0.3s;
+    }
+
+    .video-container:hover .video-thumbnail {
+        opacity: 0.85;
+    }
+
+    .play-button {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        transition: transform 0.2s, opacity 0.2s;
+        opacity: 0.9;
+    }
+
+    .video-container:hover .play-button {
+        transform: translate(-50%, -50%) scale(1.1);
+        opacity: 1;
+    }
+
+    .play-button svg path:first-child {
+        transition: fill-opacity 0.2s;
+    }
+
+    .video-container:hover .play-button svg path:first-child {
+        fill: #9D7748;
+        fill-opacity: 1;
+    }
+
+    .video-container iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 100% !important;
+        border: none;
+        z-index: 10;
+    }
+
+    .video-container.playing {
+        background-color: #000;
+    }
+
+    .video-container.playing .video-thumbnail,
+    .video-container.playing .play-button {
+        display: none;
+    }
+
+    /* Asegurar que aspect-video funciona con el iframe */
+    .video-container.aspect-video {
+        position: relative;
+    }
 </style>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const videoContainers = document.querySelectorAll('.video-container');
+
+        videoContainers.forEach(container => {
+            container.addEventListener('click', () => {
+                const videoId = container.getAttribute('data-video-id');
+                if (!videoId) return;
+
+                const iframe = document.createElement('iframe');
+                // Parámetros para minimizar elementos de YouTube
+                iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0&modestbranding=1&showinfo=0&iv_load_policy=3&controls=1`;
+                iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+                iframe.allowFullscreen = true;
+                iframe.style.cssText = 'position:absolute;top:0;left:0;width:100%;height:100%;border:none;';
+
+                // Ocultar thumbnail y botón, añadir iframe
+                const thumbnail = container.querySelector('.video-thumbnail');
+                const playBtn = container.querySelector('.play-button');
+                if (thumbnail) thumbnail.style.display = 'none';
+                if (playBtn) playBtn.style.display = 'none';
+
+                container.appendChild(iframe);
+                container.style.cursor = 'default';
+            });
+        });
+    });
+</script>

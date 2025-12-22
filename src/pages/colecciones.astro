@@ -28,8 +28,17 @@ const PREVIEW_LIMIT = 3;
     <Navbar />
 
     <main class="pt-24 px-4 sm:px-8 max-w-7xl mx-auto pb-16">
-        <h1 class="text-4xl font-sans font-light text-stone-800 mb-12 uppercase tracking-widest">Colecciones</h1>
-        
+        <h1 class="text-4xl font-sans font-light text-stone-800 mb-6 uppercase tracking-widest">Colecciones</h1>
+
+        <!-- Índice de colecciones -->
+        <nav class="collection-index">
+            {collections.map((col) => (
+                <a href={`#${col.folder}`} class="collection-index-item">
+                    {col.name}
+                </a>
+            ))}
+        </nav>
+
         {collections.map(({ folder, name }) => {
             const images = imagesByFolder[folder] || [];
             const previewImages = images.slice(0, PREVIEW_LIMIT);
@@ -38,7 +47,7 @@ const PREVIEW_LIMIT = 3;
             if (images.length === 0) return null;
             
             return (
-                <section class="mb-20">
+                <section id={folder} class="mb-20 scroll-mt-24">
                     {/* Cabecera de colección */}
                     <div class="mb-8">
                         <h2 class="text-3xl font-sans font-medium mb-4 tracking-widest uppercase" style="color: #9D7748; font-family: 'Oswald', sans-serif;">
@@ -88,6 +97,13 @@ const PREVIEW_LIMIT = 3;
     </main>
 </Layout>
 
+<!-- Botón volver arriba -->
+<button id="scroll-top" class="scroll-top-btn" aria-label="Volver arriba">
+    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 15l7-7 7 7" />
+    </svg>
+</button>
+
 <!-- Lightbox Modal -->
 <div id="lightbox" class="fixed inset-0 z-50 hidden bg-black/90 flex items-center justify-center p-4">
     <button id="lightbox-close" class="absolute top-4 right-4 text-white hover:text-stone-300 transition-colors z-10">
@@ -133,10 +149,48 @@ const PREVIEW_LIMIT = 3;
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') closeLightbox();
         });
+
+        // Botón scroll to top
+        const scrollBtn = document.getElementById('scroll-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 400) {
+                scrollBtn?.classList.add('visible');
+            } else {
+                scrollBtn?.classList.remove('visible');
+            }
+        });
+
+        scrollBtn?.addEventListener('click', () => {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
     });
 </script>
 
 <style>
+    .collection-index {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem 1rem;
+        padding: 1rem 0;
+        margin-bottom: 2rem;
+        border-top: 1px solid #e7e5e4;
+        border-bottom: 1px solid #e7e5e4;
+    }
+
+    .collection-index-item {
+        color: #78716c;
+        text-decoration: none;
+        font-size: 0.875rem;
+        padding: 0.25rem 0;
+        transition: color 0.2s;
+        white-space: nowrap;
+    }
+
+    .collection-index-item:hover {
+        color: #9D7748;
+    }
+
     .ver-mas-btn {
         position: relative;
         overflow: hidden;
@@ -161,5 +215,36 @@ const PREVIEW_LIMIT = 3;
     
     .ver-mas-btn:hover::before {
         left: 0;
+    }
+
+    .scroll-top-btn {
+        position: fixed;
+        bottom: 2rem;
+        right: 2rem;
+        width: 3rem;
+        height: 3rem;
+        background-color: #9D7748;
+        color: white;
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s, visibility 0.3s, transform 0.3s;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+        z-index: 40;
+    }
+
+    .scroll-top-btn:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .scroll-top-btn.visible {
+        opacity: 1;
+        visibility: visible;
     }
 </style>

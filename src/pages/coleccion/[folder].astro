@@ -2,7 +2,7 @@
 import Layout from '../../layouts/Layout.astro';
 import Navbar from '../../components/Navbar.astro';
 import { Image } from 'astro:assets';
-import { collectionNames, collectionPaths } from '../../config/collections.js';
+import { collectionNames, collectionDescriptions, collectionPaths } from '../../config/collections.js';
 
 // Importar todas las imágenes
 const allImages = import.meta.glob('/src/assets/**/*.{jpg,jpeg,png,webp,PNG,JPG,JPEG}', { eager: true });
@@ -14,6 +14,7 @@ export function getStaticPaths() {
 
 const { folder } = Astro.params;
 const collectionName = collectionNames[folder] || folder;
+const collectionDescription = collectionDescriptions[folder] || '';
 
 // Filtrar imágenes de esta colección
 const images = Object.entries(allImages)
@@ -29,7 +30,7 @@ const images = Object.entries(allImages)
 
     <main class="pt-24 px-4 sm:px-8 max-w-7xl mx-auto pb-16">
         <!-- Navegación -->
-        <a href="/colecciones" class="back-link">
+        <a href={`/colecciones#${folder}`} class="back-link">
             <svg class="back-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" />
             </svg>
@@ -40,7 +41,11 @@ const images = Object.entries(allImages)
             {collectionName}
         </h1>
 
-        <p class="text-stone-600 mb-12">{images.length} imágenes</p>
+        {collectionDescription && (
+            <p class="text-stone-600 mb-6 max-w-3xl leading-relaxed italic">{collectionDescription}</p>
+        )}
+
+        <p class="text-stone-500 text-sm mb-12">{images.length} imágenes</p>
 
         <!-- Grid de imágenes -->
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

@@ -4,4 +4,3 @@ dist
 .claude
 .env
 .env.local
-.astro
