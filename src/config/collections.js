@@ -10,12 +10,14 @@ export const collections = [
         description: 'Pueblos que se vacían, casas abandonadas, objetos olvidados. Entre las ruinas emergen vestigios de vidas pasadas, rastros de quienes ya no volverán. Así termina una historia mientras el desarraigo lo cubre todo como un velo de niebla.'
     },
     { folder: 'chic_rural', name: 'Chic Rural', description: '' },
+    { folder: 'galardones', name: 'Galardones', description: '' },
     { folder: 'vacas', name: 'Vacas', description: '' },
     { folder: 'recolectores', name: 'Recolectores', description: '' },
     { folder: 'ciudades_intermitentes', name: 'Ciudades Intermitentes', description: '' },
     { folder: 'por_que_lloran_las_mujeres', name: '¿Por qué lloran las mujeres?', description: '' },
     { folder: '28', name: '28', description: '' },
     { folder: 'chosco', name: 'Chosco', description: '' },
+    { folder: 'encargos', name: 'Encargos', description: '' },
     { folder: 'varias', name: 'Varias', description: '' },
 ];
 

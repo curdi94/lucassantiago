@@ -9,6 +9,13 @@
 
 export const prensa = [
     {
+        url: "https://www.lne.es/occidente/2025/08/17/palacio-meras-tineo-cumple-500-120710291.html",
+        titulo: "El palacio de Merás, en Tineo, cumple 500 años",
+        medio: "La Nueva España",
+        fecha: "2025-08-17",
+        imagen: "https://estaticos-cdn.prensaiberica.es/clip/b03e2213-1bc3-474a-878d-65018f969d02_source-aspect-ratio_default_0.webp"
+    },
+    {
         url: "https://www.lne.es/occidente/2024/12/10/chosco-convierte-joya-taller-artista-112468172.html",
         titulo: "El chosco se convierte en joya en el taller del artista rural Lucas Santiago",
         medio: "La Nueva España",
