@@ -1,0 +1,71 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import { prensaOrdenada, formatearFecha } from '../config/prensa.js';
+---
+
+<Layout title="Prensa">
+    <Navbar />
+
+    <main class="pt-24 px-4 sm:px-8 max-w-4xl mx-auto pb-16">
+        <!-- Cabecera -->
+        <header class="mb-16 text-center py-8">
+            <h1 class="text-5xl md:text-6xl font-light uppercase tracking-widest mb-4" style="font-family: 'Oswald', sans-serif; color: #9D7748;">
+                Prensa
+            </h1>
+            <p class="text-xl text-stone-500 font-light tracking-wide">
+                Apariciones en medios de comunicación
+            </p>
+        </header>
+
+        <!-- Lista de artículos -->
+        <div class="space-y-4">
+            {prensaOrdenada.map((item) => (
+                <a href={item.url} target="_blank" rel="noopener noreferrer"
+                   class="group flex gap-6 p-4 bg-white border border-stone-200 hover:border-stone-300 hover:shadow-md transition-all duration-300">
+
+                    <!-- Imagen o placeholder -->
+                    <div class="w-32 h-24 sm:w-40 sm:h-28 flex-shrink-0 bg-stone-100 overflow-hidden">
+                        {item.imagen ? (
+                            <img src={item.imagen} alt=""
+                                 class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
+                        ) : (
+                            <div class="w-full h-full flex items-center justify-center text-stone-400">
+                                {item.esVideo ? (
+                                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"/>
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                    </svg>
+                                ) : (
+                                    <svg class="w-12 h-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"/>
+                                    </svg>
+                                )}
+                            </div>
+                        )}
+                    </div>
+
+                    <!-- Contenido -->
+                    <div class="flex-1 min-w-0 flex flex-col justify-center">
+                        <p class="text-xs text-amber-700 font-medium uppercase tracking-wide mb-2">
+                            {item.medio}
+                        </p>
+                        <h2 class="text-lg text-stone-800 font-normal leading-snug group-hover:text-amber-800 transition-colors mb-2">
+                            {item.titulo}
+                        </h2>
+                        <p class="text-sm text-stone-400">
+                            {formatearFecha(item.fecha)}
+                        </p>
+                    </div>
+
+                    <!-- Flecha externa -->
+                    <div class="flex-shrink-0 self-center opacity-0 group-hover:opacity-100 transition-opacity">
+                        <svg class="w-5 h-5 text-stone-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                        </svg>
+                    </div>
+                </a>
+            ))}
+        </div>
+    </main>
+</Layout>
