@@ -2,9 +2,27 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import { prensaOrdenada, formatearFecha } from '../config/prensa.js';
+
+const description = "Apariciones en prensa y medios de comunicación de Lucas Santiago. Artículos sobre joyería rural contemporánea en La Nueva España, El Comercio, Diario de León y más.";
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "ItemList",
+  "itemListElement": prensaOrdenada.map((item, index) => ({
+    "@type": "ListItem",
+    "position": index + 1,
+    "url": item.url,
+    "name": item.titulo,
+    "description": `Artículo en ${item.medio} publicado el ${item.fecha}`
+  }))
+};
 ---
 
-<Layout title="Prensa">
+<Layout title="Prensa" description={description}>
+    <slot slot="head">
+        <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+    </slot>
+
     <Navbar />
 
     <main class="pt-24 px-4 sm:px-8 max-w-4xl mx-auto pb-16">

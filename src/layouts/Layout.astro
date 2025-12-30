@@ -1,43 +1,82 @@
 ---
 import Footer from '../components/Footer.astro';
+import CookieConsent from '../components/CookieConsent.astro';
 
 interface Props {
 	title: string;
+    description?: string;
+    image?: string;
+    type?: string;
 }
 
-const { title } = Astro.props;
+const { 
+    title, 
+    description = "Lucas Santiago - Joyería Rural Contemporánea. Piezas únicas inspiradas en la tradición y el paisaje de Asturias. Joyas de autor que rescatan la identidad rural.",
+    image = "/og-image.jpg", // Imagen por defecto copiada a public
+    type = "website" 
+} = Astro.props;
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site || 'https://lucassantiago.es');
+const siteTitle = title.includes('Lucas Santiago') ? title : `${title} | Lucas Santiago`;
 ---
 
 <!doctype html>
 <html lang="es">
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="description" content="Lucas Santiago - Joyería Rural Contemporánea" />
 		<meta name="viewport" content="width=device-width" />
+        
+        <!-- SEO Básico -->
+		<title>{siteTitle}</title>
+		<meta name="description" content={description} />
+		<meta name="generator" content={Astro.generator} />
+        <link rel="canonical" href={canonicalURL} />
+
+        <!-- Open Graph / Facebook -->
+        <meta property="og:type" content={type} />
+        <meta property="og:url" content={canonicalURL} />
+        <meta property="og:title" content={siteTitle} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={new URL(image, Astro.url)} />
+
+        <!-- Twitter -->
+        <meta property="twitter:card" content="summary_large_image" />
+        <meta property="twitter:url" content={canonicalURL} />
+        <meta property="twitter:title" content={siteTitle} />
+        <meta property="twitter:description" content={description} />
+        <meta property="twitter:image" content={new URL(image, Astro.url)} />
+
+        <!-- Favicons -->
 		<link rel="icon" type="image/x-icon" href="/favicon.ico" />
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 		<link rel="manifest" href="/site.webmanifest" />
-		<meta name="generator" content={Astro.generator} />
+		
+        <!-- Fuentes -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400&family=Oswald:wght@200..700&display=swap" rel="stylesheet">
-		<title>{title.includes('Lucas Santiago') ? title : `${title} | Lucas Santiago`}</title>
+		
+        <!-- Schema.org Global -->
         <script type="application/ld+json">
             {
               "@context": "https://schema.org",
               "@type": "WebSite",
               "name": "Lucas Santiago",
               "alternateName": ["Lucas Santiago Joyería", "Lucas Santiago - Joyería Rural Contemporánea"],
-              "url": "https://lucassantiago.es/"
+              "url": "https://lucassantiago.es/",
+              "keywords": "Joyería Rural, Joyería Contemporánea, Asturias, Tineo, Joyas de autor, Artesanía"
             }
         </script>
+
+        <slot name="head" />
 	</head>
 	<body class="bg-stone-50 text-stone-800 font-sans antialiased min-h-screen flex flex-col">
 		<slot />
 		<Footer />
+        <CookieConsent />
 	</body>
 </html>
 

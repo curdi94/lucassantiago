@@ -1,0 +1,78 @@
+---
+const GA_ID = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID;
+---
+
+<div id="cookie-consent" class="fixed bottom-0 left-0 right-0 bg-stone-900/95 text-stone-50 p-4 transform translate-y-full transition-transform duration-500 z-50 backdrop-blur-sm shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)]">
+    <div class="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="text-sm font-light text-stone-300 text-center sm:text-left">
+            <p>
+                Utilizamos cookies propias y de terceros para mejorar su experiencia y analizar el tráfico. 
+                Al continuar navegando acepta nuestra <a href="/politica-cookies" class="text-amber-400 hover:underline">política de cookies</a>.
+            </p>
+        </div>
+        <div class="flex gap-4 shrink-0">
+            <button id="reject-cookies" class="px-6 py-2 border border-stone-600 hover:bg-stone-800 text-stone-300 text-sm font-medium rounded transition-colors uppercase tracking-wider">
+                Rechazar
+            </button>
+            <button id="accept-cookies" class="px-6 py-2 bg-amber-700 hover:bg-amber-600 text-white text-sm font-medium rounded transition-colors uppercase tracking-wider">
+                Aceptar
+            </button>
+        </div>
+    </div>
+</div>
+
+<script define:vars={{ GA_ID }}>
+    // Lógica del banner de cookies
+    const cookieBanner = document.getElementById('cookie-consent');
+    const acceptButton = document.getElementById('accept-cookies');
+    const rejectButton = document.getElementById('reject-cookies');
+
+    // Comprobar si ya se ha decidido (aceptadas o rechazadas)
+    const cookiesDecision = localStorage.getItem('cookiesAccepted'); // 'true' or 'false'
+
+    if (cookiesDecision === null) {
+        // Mostrar banner con un pequeño retraso si no hay decisión
+        setTimeout(() => {
+            cookieBanner.classList.remove('translate-y-full');
+        }, 1000);
+    } else if (cookiesDecision === 'true') {
+        // Si ya están aceptadas, cargar scripts de analytics
+        loadAnalytics();
+    }
+
+    // Al aceptar
+    acceptButton.addEventListener('click', () => {
+        localStorage.setItem('cookiesAccepted', 'true');
+        cookieBanner.classList.add('translate-y-full');
+        loadAnalytics();
+    });
+
+    // Al rechazar
+    rejectButton.addEventListener('click', () => {
+        localStorage.setItem('cookiesAccepted', 'false');
+        cookieBanner.classList.add('translate-y-full');
+        // No cargamos analytics
+    });
+
+    // Función para cargar Google Analytics dinámicamente
+    function loadAnalytics() {
+        if (!GA_ID || GA_ID === 'G-XXXXXXXXXX') {
+            console.warn('Google Analytics: ID no configurado o es el placeholder por defecto.');
+            return;
+        }
+
+        // Evitar cargar dos veces
+        if (window['ga-loaded']) return;
+        window['ga-loaded'] = true;
+
+        const script = document.createElement('script');
+        script.src = `https://www.googletagmanager.com/gtag/js?id=${GA_ID}`;
+        script.async = true;
+        document.head.appendChild(script);
+
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', GA_ID);
+    }
+</script>
