@@ -31,11 +31,25 @@ export const prensa = [
         esVideo: true
     },
     {
+        url: "https://www.institutoleonesdecultura.es/lucas-santiago-reinventa-la-joyeria-rural-y-expone-el-resultado-en-el-museo-de-los-pueblos-leoneses/",
+        titulo: "Lucas Santiago reinventa la joyería rural y expone el resultado en el Museo de los Pueblos Leoneses",
+        medio: "Instituto Leonés de Cultura",
+        fecha: "2022-10-03",
+        imagen: "https://estaticos-cdn.prensaiberica.es/clip/5d4d4cdb-1a6a-4456-9094-2625cfd9d633_16-9-discover-aspect-ratio_default_0_x1485y499.webp"
+    },
+    {
         url: "https://www.lne.es/occidente/2020/12/28/lucas-santiago-gustaria-gente-llevara-26793859.html",
         titulo: "Lucas Santiago: \"Me gustaría que la gente llevara mis joyas como una demostración de identidad rural\"",
         medio: "La Nueva España",
         fecha: "2020-12-28",
         imagen: "https://estaticos-cdn.prensaiberica.es/clip/863a8826-cfa8-459a-ae64-2f023211f36b_21-9-aspect-ratio_default_1013812.webp"
+    },
+    {
+        url: "https://www.elcomercio.es/asturias/occidente/joyas-olvido-mundo-20201122000823-ntvo.html",
+        titulo: "Joyas contra el olvido del mundo rural",
+        medio: "El Comercio",
+        fecha: "2020-11-22",
+        imagen: "https://s1.ppllstatics.com/elcomercio/www/multimedia/202011/22/media/cortadas/60098891--1248x828.JPG"
     },
     {
         url: "https://tamtampress.es/2019/04/06/lucas-santiago-ofrece-una-visita-guiada-por-su-exposicion-de-joyeria-rural-vacas-2-3-en-el-cla/",
@@ -85,13 +99,6 @@ export const prensa = [
         medio: "Tineo, sus cosas y las mías",
         fecha: "2009-08-06",
         imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjeYCB6b-ZFjoGjYHEX1t-Ev00t8QKUGZcHkR3TdC3SU2K9dOtWIEY7fKk4t5M2Va5BQF2U1B8KLv9KFgN1FdZGioW6YLOCz84FjcKHwOkBPY8IZz6uFsRndiFGF2duirq64t722Zc5IYTP/s320/Lucas+Santiago.+Montaje+fotogr%C3%A1fico+de+Jorge+Luis+Alonso+Pel%C3%A1ez.jpg"
-    },
-    {
-        url: "https://www.elcomercio.es/asturias/occidente/joyas-olvido-mundo-20201122000823-ntvo.html",
-        titulo: "Joyas contra el olvido del mundo rural",
-        medio: "El Comercio",
-        fecha: "2020-11-22",
-        imagen: "https://s1.ppllstatics.com/elcomercio/www/multimedia/202011/22/media/cortadas/60098891--1248x828.JPG"
     }
 ];
 
