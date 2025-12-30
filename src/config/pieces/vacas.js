@@ -7,26 +7,26 @@
 
 export const vacasPieces = {
     "vacas_2-0_1": {
-        title: "Contemplación Bovina",
-        description: "La vaca observa el horizonte como testigo silencioso del paso del tiempo en los prados asturianos.",
-        materials: "Bronce fundido sobre base de roble. 45 × 30 × 25 cm.",
-        year: "2019"
+        title: "",
+        description: "",
+        materials: "",
+        year: ""
     },
     "vacas_2-0_2": {
-        title: "Memoria del Pasto",
-        description: "Un homenaje a las tradiciones ganaderas que definen la identidad de los valles cantábricos.",
-        materials: "Técnica mixta: bronce y hierro forjado. 38 × 22 × 18 cm.",
-        year: "2020"
+        title: "",
+        description: "",
+        materials: "",
+        year: ""
     },
     "vacas_2-0_3": {
-        title: "El Vigía",
+        title: "",
         description: "",
-        materials: "Bronce patinado. 32 × 20 × 15 cm. 2018"
+        materials: ""
     },
     "vacas_2-0_4": {
         title: "",
         description: "",
-        materials: "Escultura en bronce. Edición limitada 3/8"
+        materials: ""
     },
     "vacas_2-0_5": {
         title: "",
@@ -39,9 +39,9 @@ export const vacasPieces = {
         materials: ""
     },
     "vacas_2-2_0": {
-        title: "Rumiando Sueños",
-        description: "La humanización del animal revela nuestra propia condición: seres contemplativos en busca de significado.",
-        materials: "Bronce fundido a la cera perdida. 50 × 35 × 28 cm. 2021"
+        title: "",
+        description: "",
+        materials: ""
     },
     "vacas_2-2_1": {
         title: "",

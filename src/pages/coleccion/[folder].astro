@@ -7,11 +7,15 @@ import { collectionNames, collectionDescriptions, collectionPaths } from '../../
 // Importar datos de piezas por colección
 import { vacuoPieces } from '../../config/pieces/vacuo.js';
 import { vacasPieces } from '../../config/pieces/vacas.js';
+import { galardonesPieces } from '../../config/pieces/galardones.js';
+import { encargosPieces } from '../../config/pieces/encargos.js';
 
 // Mapa de colección -> datos de piezas
 const piecesData: Record<string, Record<string, { title: string; year: string; description: string; materials: string }>> = {
     vacuo: vacuoPieces,
     vacas: vacasPieces,
+    galardones: galardonesPieces,
+    encargos: encargosPieces,
 };
 
 // Importar todas las imágenes
