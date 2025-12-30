@@ -11,7 +11,7 @@ import { galardonesPieces } from '../../config/pieces/galardones.js';
 import { encargosPieces } from '../../config/pieces/encargos.js';
 
 // Mapa de colección -> datos de piezas
-const piecesData: Record<string, Record<string, { title: string; year: string; description: string; materials: string }>> = {
+const piecesData: Record<string, Record<string, { title: string; year: string; description: string; materials: string; order?: number }>> = {
     vacuo: vacuoPieces,
     vacas: vacasPieces,
     galardones: galardonesPieces,
@@ -47,14 +47,21 @@ const images = Object.entries(allImages)
     })
     .map(([path, img]) => {
         const fileKey = getFileKey(path);
-        const pieceInfo = currentPiecesData[fileKey] || { title: '', year: '', description: '', materials: '' };
+        const pieceInfo = currentPiecesData[fileKey] || { title: '', year: '', description: '', materials: '', order: 9999 };
         return {
             image: (img as any).default,
             title: pieceInfo.title,
             year: pieceInfo.year,
-            description: pieceInfo.description,
-            materials: pieceInfo.materials
+            description: pieceInfo.description ? pieceInfo.description.trim() : '',
+            materials: pieceInfo.materials,
+            order: pieceInfo.order || 9999,
+            id: fileKey // Útil para depuración o keys estables
         };
+    })
+    .sort((a, b) => {
+        const orderDiff = a.order - b.order;
+        if (orderDiff !== 0) return orderDiff;
+        return a.id.localeCompare(b.id, undefined, { numeric: true, sensitivity: 'base' });
     });
 ---
 
@@ -75,7 +82,7 @@ const images = Object.entries(allImages)
         </h1>
 
         {collectionDescription && (
-            <p class="text-stone-600 mb-6 max-w-3xl leading-relaxed italic">{collectionDescription}</p>
+            <p class="text-stone-600 mb-6 max-w-3xl leading-loose italic">{collectionDescription}</p>
         )}
 
         <p class="text-stone-500 text-sm mb-12">{images.length} imágenes</p>
@@ -216,6 +223,7 @@ const images = Object.entries(allImages)
         line-height: 1.6;
         margin: 0;
         font-style: italic;
+        white-space: pre-line;
     }
 
     .piece-materials {
