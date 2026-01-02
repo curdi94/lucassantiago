@@ -9,7 +9,7 @@ import { Image } from 'astro:assets';
 const exposiciones = {
     lugar: "Hotel Palacio de Merás",
     ubicacion: "Tineo, Asturias",
-    fecha: "Hasta final del año 2025",
+    fecha: "",
     videoId: "-RwfYSBFenc",
 };
 
@@ -420,14 +420,35 @@ const bannerImage = Object.values(bannerFiles)[0] as any;
                     if (!mapInitialized) {
                         const loadLeaflet = () => {
                             const map = L.map('map', {
-                                scrollWheelZoom: false
-                            }).setView([43.333612, -6.416713], 16);
+                                scrollWheelZoom: true
+                            }).setView([43.333612, -6.416713], 15);
 
                             // Capa CartoDB Positron (Gris/Minimalista) - GRATUITA
                             L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
                                 attribution: '&copy; OpenStreetMap contributors &copy; CARTO',
                                 subdomains: 'abcd',
                                 maxZoom: 20
+                            }).addTo(map);
+
+                            const tineoArea = {
+                                "type": "Feature",
+                                "properties": {
+                                    "name": "Tineo Context"
+                                },
+                                "geometry": {
+                                    "type": "Polygon",
+                                    "coordinates": [[
+                                        [-6.5, 43.4], [-6.3, 43.4], [-6.3, 43.2], [-6.5, 43.2], [-6.5, 43.4]
+                                    ]]
+                                }
+                            };
+                            
+                            // Círculo para visualizar zona
+                             L.circle([43.333612, -6.416713], {
+                                color: '#9D7748',
+                                fillColor: '#9D7748',
+                                fillOpacity: 0.1,
+                                radius: 500
                             }).addTo(map);
 
                             L.marker([43.333612, -6.416713]).addTo(map)

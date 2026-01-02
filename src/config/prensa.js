@@ -35,7 +35,7 @@ export const prensa = [
         titulo: "Lucas Santiago reinventa la joyería rural y expone el resultado en el Museo de los Pueblos Leoneses",
         medio: "Instituto Leonés de Cultura",
         fecha: "2022-10-03",
-        imagen: "https://estaticos-cdn.prensaiberica.es/clip/5d4d4cdb-1a6a-4456-9094-2625cfd9d633_16-9-discover-aspect-ratio_default_0_x1485y499.webp"
+        imagen: "https://www.institutoleonesdecultura.es/wp-content/uploads/2022/10/F3-WEB-1024x576.jpg"
     },
     {
         url: "https://www.lne.es/occidente/2020/12/28/lucas-santiago-gustaria-gente-llevara-26793859.html",

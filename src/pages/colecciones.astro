@@ -44,7 +44,7 @@ Object.entries(allImages).forEach(([path, img]) => {
         path: path,
         title: pieceInfo.title,
         year: pieceInfo.year,
-        description: pieceInfo.description,
+        description: pieceInfo.description ? pieceInfo.description.trim() : '',
         materials: pieceInfo.materials
     });
 });
@@ -456,6 +456,7 @@ const PREVIEW_LIMIT = 3;
         line-height: 1.6;
         margin: 0;
         font-style: italic;
+        white-space: pre-line;
     }
 
     .piece-materials {

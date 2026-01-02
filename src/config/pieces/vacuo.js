@@ -19,8 +19,7 @@ export const vacuoPieces = {
         title: "Coucetsín",
         description: `
             La resistencia crea frontera,
-            esa linea invisible entre alguien y nada
-        `,
+            esa linea invisible entre alguien y nada`,
         materials: "Plata reciclada oxidada, tejo, iroko, boj y pintura",
         year: "2022"
     },
