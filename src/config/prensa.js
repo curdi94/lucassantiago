@@ -98,7 +98,42 @@ export const prensa = [
         titulo: "Lucas Santiago o el amor a lo rural convertido en joyas",
         medio: "Tineo, sus cosas y las mías",
         fecha: "2009-08-06",
-        imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjeYCB6b-ZFjoGjYHEX1t-Ev00t8QKUGZcHkR3TdC3SU2K9dOtWIEY7fKk4t5M2Va5BQF2U1B8KLv9KFgN1FdZGioW6YLOCz84FjcKHwOkBPY8IZz6uFsRndiFGF2duirq64t722Zc5IYTP/s320/Lucas+Santiago.+Montaje+fotogr%C3%A1fico+de+Jorge+Luis+Alonso+Pel%C3%A1ez.jpg"
+        imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjeYCB6b-ZFjoGjYHEX1t-Ev00t8QKUGZcHkR3TdC3SU2K9dOtWIEY7fKk4t5M2Va5BQF2U1B8KLv9KFgN1FdZGioW6YLOCz84FjcKHwOkBPY8IZz6uFsRndiFGF2duirq64t722Zc5IYTP/s800/Lucas+Santiago.+Montaje+fotogr%C3%A1fico+de+Jorge+Luis+Alonso+Pel%C3%A1ez.jpg"
+    },
+    {
+        url: "https://tineosuscosasylasmias.blogspot.com/2022/05/la-trascendencia-devacuo.html",
+        titulo: "La trascendencia de Vacuo",
+        medio: "Tineo, sus cosas y las mías",
+        fecha: "2022-05-24",
+        imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgYzeJqDYBLYHak_7OT8bfyz1JOBt4XBze5h5H5m88tF_-74ZZpR9so0STRZEcwgPJPOrWWx65VcmYS9sjIDCtBAtXiY0itr4g3tvldV4JzXgcpbGBUsaX8WUmFitifASiTrMKEaBO-58CgJFKBL-gcN5rZL-IjUf10lmP049dpwOgykMI1Ydtl7Fwr-A/s800/santi(240522)lne.jpg"
+    },
+    {
+        url: "https://tineosuscosasylasmias.blogspot.com/2017/08/menudas-joyas-de-vacas.html",
+        titulo: "¡Menudas joyas de vacas!",
+        medio: "Tineo, sus cosas y las mías",
+        fecha: "2017-08-25",
+        imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgCkyt-eXhLm8g3tBDVVEHN_qXC3CwJp2ETKzf-rOa6kY9M-_oGDqTRScgXfwo-owKoDaUTikx8w8rZd-_25XmwTaQqxPbjHGcsYo4v483KBOoC8hsxC8pd-zVVR6z30CToWgXKwu1voQrf/s800/santi%2528250817%2529lne.jpg"
+    },
+    {
+        url: "https://tineosuscosasylasmias.blogspot.com/2010/11/lucas-santiago-expone-ciudades.html",
+        titulo: "Lucas Santiago expone “Ciudades intermitentes” en Oviedo",
+        medio: "Tineo, sus cosas y las mías",
+        fecha: "2010-11-21",
+        imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgk88q7OhX2rV62lYWFZbevrtxtJ5MGCu5v0vF-eMMSyNvE75r_BXWaP1gJxMKSMHNcIScFOi2ot8pimHvubUgI1OK4BCgRmvTBryfobL0jRHGBzm-Eh04EolUQEvjfjtlTECtzcyGHIRXw/s800/IMG_3223.JPG"
+    },
+    {
+        url: "https://tineosuscosasylasmias.blogspot.com/2010/08/ciudades-intermitentes-paraisos.html",
+        titulo: "Ciudades intermitentes, paraísos infinitos",
+        medio: "Tineo, sus cosas y las mías",
+        fecha: "2010-08-15",
+        imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjVq16FYQrnPkp3ObWyozmLagL587sZr7vgVbOBQolCaQM2xNZWB8LMpncSWysLZhS-L3xJm-pWfsC6IdYxgA8Im6uJae3lSwbWH_ac5LHUv9X2uriWezB1lgWF_ZfVsHb3-Xw5aP26eQ5_/s800/Lucas+Santiago+-+copia.JPG"
+    },
+    {
+        url: "https://tineosuscosasylasmias.blogspot.com/2009/08/28-que-son-27-pero-que-seran-28.html",
+        titulo: "28 que son 27 pero que serán 28",
+        medio: "Tineo, sus cosas y las mías",
+        fecha: "2009-08-11",
+        imagen: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgRwRdp9ahGQNv7X1U-xKhxj_8WgPdu3TEI-nNoGOeodhbiQbnxsAM-_ipZ8e20__jwX3se9iTAzhCOm4r9yotvPI_E73b4FtJWud_EkYWIsBVhGIZ6edLzT4oGd1kg6y_xXZhHfyrmJn6l/s800/28+Lucas+Santiago.jpg"
     }
 ];
 
