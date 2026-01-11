@@ -36,9 +36,18 @@ const bannerImage = Object.values(bannerFiles)[0] as any;
     <main class="relative z-10 pt-24 px-4 sm:px-8 max-w-6xl mx-auto pb-16">
         {/* Hero compacto */}
         <section class="mb-10 text-center py-6">
-            <h1 class="text-5xl md:text-6xl font-light uppercase tracking-widest mb-12" style="font-family: 'Oswald', sans-serif; color: #9D7748;">
-                Última exposición | ya finalizada
-            </h1>
+            <div class="mb-12">
+                <h1 class="text-5xl md:text-6xl font-light uppercase tracking-widest mb-4" style="font-family: 'Oswald', sans-serif; color: #9D7748;">
+                    Exposición 2025
+                </h1>
+                <div class="flex items-center justify-center gap-4">
+                     <span class="h-px w-12 bg-gradient-to-r from-transparent to-stone-300"></span>
+                     <p class="text-base md:text-lg text-stone-800 font-medium tracking-[0.2em] uppercase">
+                        Finalizada
+                     </p>
+                     <span class="h-px w-12 bg-gradient-to-l from-transparent to-stone-300"></span>
+                </div>
+            </div>
 
             {/* Banner con botón desplegable */}
             {bannerImage && (
